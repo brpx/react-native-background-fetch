@@ -92,11 +92,13 @@ helpers.addToFrameworkSearchPaths(
 
 // extends the projects AppDelegate.m with our completion handler
 const projectGroup = project.findPBXGroupKey({ name: packageManifest.name });
-project.addSourceFile(
-    pathToAppdelegateExtension,
-    { target: project.getFirstTarget().uuid },
-    projectGroup
-);
+try {
+    project.addSourceFile(
+        pathToAppdelegateExtension,
+        { target: project.getFirstTarget().uuid },
+        projectGroup
+    );
+} catch(e) {}
 
 // enable BackgroundModes in xcode project without overriding any previously
 // defined values in the project file.
